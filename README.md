@@ -52,7 +52,7 @@ Request ID blir ikke propagert videre, og skal ha sitt opphav hos konsumenten om
 - Versjon på meldingen avledes fra pathen '/v1/ettersending' -> 1
 
 ## Alarmer
-Vi bruker [nais-alerts](https://doc.nais.io/observability/alerts) for å sette opp alarmer. Disse finner man konfigurert i [nais/alerts.yml](nais/alerterator.yml).
+Vi bruker [nais-alerts](https://doc.nais.io/observability/alerts) for å sette opp alarmer. Disse finner man konfigurert i [nais/alerterator.yml](nais/alerterator.yml).
 
 ## Henvendelser
 Spørsmål knyttet til koden eller prosjektet kan stilles som issues her på GitHub.
