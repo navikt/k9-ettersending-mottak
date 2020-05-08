@@ -1,0 +1,25 @@
+{
+  "app": "k9-ettersending-mottak",
+  "cluster": "prod-fss",
+  "namespace": "default",
+  "team": "dusseldorf",
+  "minReplicas": "1",
+  "maxReplicas": "2",
+  "ingresses": [
+    "https://k9-ettersending-mottak.nais.adeo.no"
+  ],
+  "vaultKvPath": "/kv/prod/fss/k9-ettersending-mottak/default",
+  "azureadKvPath": "/azuread/data/prod/creds/k9-ettersending-mottak",
+  "serviceuserKvPath": "/serviceuser/data/prod/srvk9ettersend-mtk",
+  "env": {
+    "K9_DOKUMENT_BASE_URL": "https://k9-dokument.nais.adeo.no",
+    "AZURE_CLIENT_ID": "a4eaccac-44bd-41da-b9a4-2b3845686ad6",
+    "AZURE_AUTHORIZED_CLIENTS": "1c494523-b92c-4387-9e18-a43e654d511c",
+    "AZURE_V1_DISCOVERY_ENDPOINT": "https://login.microsoftonline.com/62366534-1ec3-4962-8869-9b5535279d0b/.well-known/openid-configuration",
+    "AZURE_V2_DISCOVERY_ENDPOINT": "https://login.microsoftonline.com/62366534-1ec3-4962-8869-9b5535279d0b/v2.0/.well-known/openid-configuration",
+    "LAGRE_DOKUMENT_SCOPES": "0c5a6709-ba2a-42b7-bbfc-9b9f844e2ee2/.default",
+    "KAFKA_BOOTSTRAP_SERVERS": "a01apvl00145.adeo.no:8443,a01apvl00146.adeo.no:8443,a01apvl00147.adeo.no:8443,a01apvl00148.adeo.no:8443,a01apvl00149.adeo.no:8443,a01apvl00150.adeo.no:8443"
+  },
+  "slack-channel": "sif-alerts",
+  "app-alert-ingress": "https://k9-ettersending-mottak.nais.adeo.no"
+}
