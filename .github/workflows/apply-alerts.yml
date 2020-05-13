@@ -4,8 +4,8 @@ on:
   push:
     paths:
       - 'nais/alerterator.yml'
-      - 'nais/dev-sbs.json.json'
-      - 'nais/prod-sbs.json.json'
+      - 'nais/dev-fss.json'
+      - 'nais/prod-fss.json'
       - '.github/workflows/apply-alerts.yml'
     branches:
       - 'master'
