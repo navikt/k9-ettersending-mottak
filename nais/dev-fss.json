@@ -20,5 +20,6 @@
     "KAFKA_BOOTSTRAP_SERVERS": "b27apvl00045.preprod.local:8443,b27apvl00046.preprod.local:8443,b27apvl00047.preprod.local:8443"
   },
   "slack-channel": "sif-alerts-dev",
+  "slack-notify-type": "<!here> | k9-ettersending-api | ",
   "app-alert-ingress": "https://k9-ettersending-mottak.nais.preprod.local"
 }
