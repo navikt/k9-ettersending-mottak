@@ -60,7 +60,7 @@ class K9EttersendingMottakTest {
 
         private val kafkaEnvironment = KafkaWrapper.bootstrap()
         private val kafkaTestConsumer = kafkaEnvironment.testConsumer()
-        private val objectMapper = jacksonObjectMapper().dusseldorfConfigured()
+        private val objectMapper = jacksonObjectMapper().k9EttersendingKonfigurert()
 
         private val authorizedAccessToken = Azure.V1_0.generateJwt(clientId = "k9-ettersending-api", audience = "k9-ettersending-mottak")
         private val unAauthorizedAccessToken = Azure.V2_0.generateJwt(clientId = "ikke-authorized-client", audience = "k9-ettersending-mottak")

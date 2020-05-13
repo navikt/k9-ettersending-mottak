@@ -1,5 +1,7 @@
 package no.nav.helse
 
+import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import io.ktor.application.*
 import io.ktor.auth.Authentication
@@ -59,8 +61,7 @@ fun Application.k9EttersendingMottak() {
 
     install(ContentNegotiation) {
         jackson {
-            dusseldorfConfigured()
-                .setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE)
+            k9EttersendingKonfigurert()
         }
     }
 
@@ -131,8 +132,6 @@ fun Application.k9EttersendingMottak() {
     }
 }
 
-private fun Url.Companion.healthURL(baseUrl: URI) = Url.buildURL(baseUrl = baseUrl, pathParts = listOf("health"))
-
 private fun ApplicationCall.setSoknadItAsAttributeAndGet(): String {
     val soknadId = UUID.randomUUID().toString()
     attributes.put(soknadIdAttributeKey, soknadId)
@@ -140,3 +139,10 @@ private fun ApplicationCall.setSoknadItAsAttributeAndGet(): String {
 }
 
 internal fun ApplicationCall.getSoknadId() = SoknadId(attributes[soknadIdAttributeKey])
+
+internal fun ObjectMapper.k9EttersendingKonfigurert(): ObjectMapper = dusseldorfConfigured()
+
+internal fun ObjectMapper.k9DokumentKonfigurert(): ObjectMapper = dusseldorfConfigured().apply {
+    configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+    propertyNamingStrategy = PropertyNamingStrategy.SNAKE_CASE
+}

@@ -1,8 +1,5 @@
 package no.nav.helse.dokument
 
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.github.kittinunf.fuel.coroutines.awaitStringResponseResult
 import com.github.kittinunf.fuel.httpPost
@@ -12,8 +9,8 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
-import no.nav.helse.CorrelationId
 import no.nav.helse.AktoerId
+import no.nav.helse.CorrelationId
 import no.nav.helse.dusseldorf.ktor.client.buildURL
 import no.nav.helse.dusseldorf.ktor.core.Retry
 import no.nav.helse.dusseldorf.ktor.health.HealthCheck
@@ -23,6 +20,7 @@ import no.nav.helse.dusseldorf.ktor.health.UnHealthy
 import no.nav.helse.dusseldorf.ktor.metrics.Operation
 import no.nav.helse.dusseldorf.oauth2.client.AccessTokenClient
 import no.nav.helse.dusseldorf.oauth2.client.CachedAccessTokenClient
+import no.nav.helse.k9DokumentKonfigurert
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.ByteArrayInputStream
@@ -32,7 +30,7 @@ import java.time.Duration
 internal class DokumentGateway(
     private val accessTokenClient: AccessTokenClient,
     private val lagreDokumentScopes: Set<String>,
-    baseUrl : URI
+    baseUrl: URI
 ) : HealthCheck {
 
     private companion object {
@@ -45,7 +43,7 @@ internal class DokumentGateway(
         pathParts = listOf("v1", "dokument")
     )
 
-    private val objectMapper = configuredObjectMapper()
+    private val objectMapper = jacksonObjectMapper().k9DokumentKonfigurert()
     private val cachedAccessTokenClient = CachedAccessTokenClient(accessTokenClient)
 
     override suspend fun check(): Result {
@@ -62,7 +60,7 @@ internal class DokumentGateway(
         dokumenter: Set<Dokument>,
         aktoerId: AktoerId,
         correlationId: CorrelationId
-    ) : List<URI> {
+    ): List<URI> {
         val authorizationHeader = cachedAccessTokenClient.getAccessToken(lagreDokumentScopes).asAuthoriationHeader()
 
         return coroutineScope {
@@ -87,7 +85,7 @@ internal class DokumentGateway(
         aktoerId: AktoerId,
         correlationId: CorrelationId,
         authorizationHeader: String
-    ) : URI {
+    ): URI {
 
         val urlMedEier = Url.buildURL(
             baseUrl = completeUrl,
@@ -120,18 +118,13 @@ internal class DokumentGateway(
             result.fold(
                 { URI(response.header(HttpHeaders.Location).first()) },
                 { error ->
-                    logger.error("Error response = '${error.response.body().asString("text/plain")}' fra '${request.url}'")
+                    logger.error(
+                        "Error response = '${error.response.body().asString("text/plain")}' fra '${request.url}'"
+                    )
                     logger.error(error.toString())
                     throw IllegalStateException("HTTP {$response.statusCode} -> Feil ved lagring av dokument.")
                 }
             )
         }
-    }
-
-    private fun configuredObjectMapper() : ObjectMapper {
-        val objectMapper = jacksonObjectMapper()
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-        objectMapper.propertyNamingStrategy = PropertyNamingStrategy.SNAKE_CASE
-        return objectMapper
     }
 }
