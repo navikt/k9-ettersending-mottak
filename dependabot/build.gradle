@@ -7,7 +7,7 @@ dependencies {
     compile 'no.nav.helse:dusseldorf-ktor-auth:1.3.2.9c88b78'
     compile 'no.nav.helse:dusseldorf-ktor-client:1.3.2.9c88b78'
     compile 'no.nav.helse:dusseldorf-oauth2-client:1.3.2.9c88b78'
-    compile 'org.apache.kafka:kafka-clients:2.3.0'
+    compile 'org.apache.kafka:kafka-clients:2.6.0'
     testCompile 'no.nav:kafka-embedded-env:2.2.0'
     testCompile 'no.nav.helse:dusseldorf-test-support:1.3.2.9c88b78'
     testCompile 'io.ktor:ktor-server-test-host:1.3.2'
