@@ -19,10 +19,7 @@ buildscript {
 }
 
 repositories {
-    maven("http://packages.confluent.io/maven/")
-    jcenter()
     mavenLocal()
-    mavenCentral()
 
     maven {
         name = "GitHubPackages"
@@ -32,6 +29,10 @@ repositories {
             password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
         }
     }
+
+    mavenCentral()
+    jcenter()
+    maven("http://packages.confluent.io/maven/")
 }
 
 
