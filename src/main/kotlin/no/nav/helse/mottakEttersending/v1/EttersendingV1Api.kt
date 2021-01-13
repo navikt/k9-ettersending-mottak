@@ -11,6 +11,8 @@ import io.ktor.response.ApplicationResponse
 import io.ktor.response.respond
 import io.ktor.routing.Route
 import io.ktor.routing.post
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import no.nav.helse.Metadata
 import no.nav.helse.getSoknadId
 import org.slf4j.Logger
@@ -26,7 +28,7 @@ internal fun Route.SoknadV1Api(
     post("v1/ettersend") {
         val soknadId = call.getSoknadId()
         val metadata = call.metadata()
-        val soknad = call.soknadEttersending()
+        val soknad = withContext(Dispatchers.IO) {call.soknadEttersending()}
 
         ettersendingV1MottakService.leggTilProsessering(
             soknadId = soknadId,
