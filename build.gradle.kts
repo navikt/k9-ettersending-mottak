@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
-val dusseldorfKtorVersion = "1.3.2.9c88b78"
+val dusseldorfKtorVersion = "1.5.0.8b77f1d"
 val ktorVersion = ext.get("ktorVersion").toString()
 val kafkaEmbeddedEnvVersion = "2.2.0"
 val kafkaVersion = "2.3.0" // Alligned med version fra kafka-embedded-env
@@ -10,12 +10,12 @@ val mainClass = "no.nav.helse.K9EttersendingMottakKt"
 
 
 plugins {
-    kotlin("jvm") version "1.3.41"
+    kotlin("jvm") version "1.4.21"
     id("com.github.johnrengelman.shadow") version "5.1.0"
 }
 
 buildscript {
-    apply("https://raw.githubusercontent.com/navikt/dusseldorf-ktor/9c88b788e57939fb6e3d18650393a7e9fb65960f/gradle/dusseldorf-ktor.gradle.kts")
+    apply("https://raw.githubusercontent.com/navikt/dusseldorf-ktor/8b77f1d53e98bad7c081c3463871021bb8edc51f/gradle/dusseldorf-ktor.gradle.kts")
 }
 
 repositories {
@@ -83,7 +83,7 @@ tasks.withType<ShadowJar> {
 }
 
 tasks.withType<Wrapper> {
-    gradleVersion = "5.6"
+    gradleVersion = "6.7.1"
 }
 
 tasks.register("createDependabotFile") {
