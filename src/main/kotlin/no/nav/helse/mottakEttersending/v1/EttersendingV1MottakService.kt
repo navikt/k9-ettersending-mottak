@@ -3,7 +3,7 @@ package no.nav.helse.mottakEttersending.v1
 import no.nav.helse.AktoerId
 import no.nav.helse.CorrelationId
 import no.nav.helse.Metadata
-import no.nav.helse.SoknadId
+import no.nav.helse.SøknadId
 import no.nav.helse.dokument.Dokument
 import no.nav.helse.dokument.DokumentGateway
 import org.slf4j.LoggerFactory
@@ -19,10 +19,10 @@ internal class EttersendingV1MottakService(
     }
 
     internal suspend fun leggTilProsessering(
-        soknadId: SoknadId,
+        soknadId: SøknadId,
         metadata: Metadata,
         soknad: EttersendingV1Incoming
-    ) : SoknadId {
+    ) : SøknadId {
         val correlationId = CorrelationId(metadata.correlationId)
 
         logger.trace("Lagrer vedlegg")

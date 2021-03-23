@@ -22,6 +22,7 @@ import no.nav.helse.dusseldorf.testsupport.wiremock.WireMockBuilder
 import no.nav.helse.mottakEttersending.v1.EttersendingV1Incoming
 import no.nav.helse.mottakEttersending.v1.EttersendingV1Outgoing
 import no.nav.helse.kafka.Topics
+import no.nav.helse.mottakEttersending.v1.JsonKeys
 import org.apache.commons.codec.binary.Base64
 import org.json.JSONObject
 import org.junit.AfterClass
@@ -29,6 +30,7 @@ import org.junit.BeforeClass
 import org.skyscreamer.jsonassert.JSONAssert
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -162,6 +164,26 @@ class K9EttersendingMottakTest {
         val sendtTilProsessering  = hentEttersendingSendtTilProsessering(soknadId)
         verifiserEttersendingLagtTilProsessering(
             incomingJsonString = soknad,
+            outgoingJsonObject = sendtTilProsessering
+        )
+    }
+
+    @Test
+    fun `Gyldig ettersending med søknadsId fra API blir lagt til prosessering`(){
+        val søknadId = UUID.randomUUID().toString()
+        val søknad = gyldigEttersending(dNummerA, søknadId)
+
+        val søknadIdFraRequest = requestAndAssert(
+            soknad = søknad,
+            expectedCode = HttpStatusCode.Accepted,
+            expectedResponse = null,
+            accessToken = authorizedAccessToken,
+            path = "/v1/ettersend"
+        )
+        assertEquals(søknadId, søknadIdFraRequest)
+        val sendtTilProsessering  = hentEttersendingSendtTilProsessering(søknadId)
+        verifiserEttersendingLagtTilProsessering(
+            incomingJsonString = søknad,
             outgoingJsonObject = sendtTilProsessering
         )
     }
@@ -378,9 +400,17 @@ class K9EttersendingMottakTest {
         """.trimIndent()
 
     private fun gyldigEttersending(
-        fodselsnummerSoker: String
+        fodselsnummerSoker: String,
+        søknadId: String? = null
     ) : String = """
         {
+          "${JsonKeys.søknadId}" : ${
+                when(søknadId) {
+                    null -> null
+                    else -> "${søknadId}"
+                }
+            }
+          ,
           "søker": {
             "fødselsnummer": "$fodselsnummerSoker",
             "aktørId": "123456"

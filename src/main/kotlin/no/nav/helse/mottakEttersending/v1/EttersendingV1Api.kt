@@ -14,7 +14,8 @@ import io.ktor.routing.post
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import no.nav.helse.Metadata
-import no.nav.helse.getSoknadId
+import no.nav.helse.SøknadId
+import no.nav.helse.getSøknadId
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import validate
@@ -26,16 +27,16 @@ internal fun Route.SoknadV1Api(
 ) {
 
     post("v1/ettersend") {
-        val soknadId = call.getSoknadId()
         val metadata = call.metadata()
-        val soknad = withContext(Dispatchers.IO) {call.soknadEttersending()}
+        val søknad = withContext(Dispatchers.IO) {call.soknadEttersending()}
+        val søknadId: SøknadId = søknad.søknadId ?: call.getSøknadId()
 
         ettersendingV1MottakService.leggTilProsessering(
-            soknadId = soknadId,
+            soknadId = søknadId,
             metadata = metadata,
-            soknad = soknad
+            soknad = søknad
         )
-        call.respond(HttpStatusCode.Accepted, mapOf("id" to soknadId.id))
+        call.respond(HttpStatusCode.Accepted, mapOf("id" to søknadId.id))
     }
 }
 

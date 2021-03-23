@@ -10,8 +10,6 @@ import io.ktor.features.CallId
 import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
 import io.ktor.features.StatusPages
-import io.ktor.http.HttpStatusCode
-import io.ktor.http.Url
 import io.ktor.jackson.jackson
 import io.ktor.metrics.micrometer.MicrometerMetrics
 import io.ktor.routing.Routing
@@ -21,9 +19,6 @@ import io.prometheus.client.hotspot.DefaultExports
 import no.nav.helse.auth.AccessTokenClientResolver
 import no.nav.helse.dokument.DokumentGateway
 import no.nav.helse.dusseldorf.ktor.auth.*
-import no.nav.helse.dusseldorf.ktor.client.HttpRequestHealthCheck
-import no.nav.helse.dusseldorf.ktor.client.HttpRequestHealthConfig
-import no.nav.helse.dusseldorf.ktor.client.buildURL
 import no.nav.helse.dusseldorf.ktor.core.*
 import no.nav.helse.dusseldorf.ktor.health.HealthRoute
 import no.nav.helse.dusseldorf.ktor.health.HealthService
@@ -36,7 +31,6 @@ import no.nav.helse.mottakEttersending.v1.EttersendingV1KafkaProducer
 import no.nav.helse.mottakEttersending.v1.EttersendingV1MottakService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.net.URI
 import java.util.*
 
 private val logger: Logger = LoggerFactory.getLogger("no.nav.K9EttersendingMottak")
@@ -138,7 +132,7 @@ private fun ApplicationCall.setSoknadItAsAttributeAndGet(): String {
     return soknadId
 }
 
-internal fun ApplicationCall.getSoknadId() = SoknadId(attributes[soknadIdAttributeKey])
+internal fun ApplicationCall.getSøknadId() = SøknadId(attributes[soknadIdAttributeKey])
 
 internal fun ObjectMapper.k9EttersendingKonfigurert(): ObjectMapper = dusseldorfConfigured()
 
