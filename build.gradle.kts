@@ -4,7 +4,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 val dusseldorfKtorVersion = "1.5.1.609bb61"
 val ktorVersion = ext.get("ktorVersion").toString()
 val kafkaEmbeddedEnvVersion = "2.2.0"
-val kafkaVersion = "2.3.0" // Alligned med version fra kafka-embedded-env
+val kafkaVersion = "6.1.1-ce" // Alligned med version fra kafka-embedded-env
 
 val mainClass = "no.nav.helse.K9EttersendingMottakKt"
 
