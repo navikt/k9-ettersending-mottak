@@ -35,7 +35,7 @@ internal class EttersendingV1MottakService(
         val outgoing = soknad
             .medVedleggTitler()
             .medVedleggUrls(vedleggUrls)
-            .medSoknadId(soknadId)
+            .medSøknadId(soknadId)
             .somOutgoing()
 
         logger.trace("Legger ettersending på kø")

@@ -42,7 +42,7 @@ internal class EttersendingV1KafkaProducer(
         val recordMetaData = producer.send(
             ProducerRecord(
                 TOPIC_USE.name,
-                soknad.soknadId.id,
+                soknad.søknadId.id,
                 TopicEntry(
                     metadata = metadata,
                     data = soknad.jsonObject

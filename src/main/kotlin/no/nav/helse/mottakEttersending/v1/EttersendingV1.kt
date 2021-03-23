@@ -54,7 +54,7 @@ internal class EttersendingV1Incoming(json: String) {
         else -> SøknadId(søknadId)
     }
 
-    internal fun medSoknadId(soknadId: SøknadId): EttersendingV1Incoming {
+    internal fun medSøknadId(soknadId: SøknadId): EttersendingV1Incoming {
         jsonObject.put(JsonKeys.søknadId, soknadId.id)
         return this
     }
@@ -78,7 +78,7 @@ internal class EttersendingV1Incoming(json: String) {
 }
 
 internal class EttersendingV1Outgoing(internal val jsonObject: JSONObject) {
-    internal val soknadId = SøknadId(jsonObject.getString(JsonKeys.søknadId))
+    internal val søknadId = SøknadId(jsonObject.getString(JsonKeys.søknadId))
     internal val vedleggUrls = hentVedleggUrls()
 
     private fun hentVedleggUrls() : List<URI> {

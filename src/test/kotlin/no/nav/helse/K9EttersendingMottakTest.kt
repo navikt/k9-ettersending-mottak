@@ -16,7 +16,6 @@ import io.ktor.server.testing.setBody
 import io.ktor.util.KtorExperimentalAPI
 import no.nav.common.KafkaEnvironment
 import no.nav.helse.dusseldorf.ktor.core.fromResources
-import no.nav.helse.dusseldorf.ktor.jackson.dusseldorfConfigured
 import no.nav.helse.dusseldorf.testsupport.jws.Azure
 import no.nav.helse.dusseldorf.testsupport.wiremock.WireMockBuilder
 import no.nav.helse.mottakEttersending.v1.EttersendingV1Incoming
@@ -297,7 +296,7 @@ class K9EttersendingMottakTest {
             incomingJsonString
         )
             .medVedleggTitler()
-            .medSoknadId(outgoing.soknadId)
+            .medSøknadId(outgoing.søknadId)
             .medVedleggUrls(outgoing.vedleggUrls)
             .somOutgoing()
 
