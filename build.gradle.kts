@@ -11,7 +11,7 @@ val mainClass = "no.nav.helse.K9EttersendingMottakKt"
 
 plugins {
     kotlin("jvm") version "1.4.32"
-    id("com.github.johnrengelman.shadow") version "6.1.0"
+    id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
 buildscript {
