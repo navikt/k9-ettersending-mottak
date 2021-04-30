@@ -64,7 +64,7 @@ class K9EttersendingMottakTest {
         private val objectMapper = jacksonObjectMapper().k9EttersendingKonfigurert()
 
         private val authorizedAccessToken = Azure.V1_0.generateJwt(clientId = "k9-ettersending-api", audience = "k9-ettersending-mottak")
-        private val unAauthorizedAccessToken = Azure.V2_0.generateJwt(clientId = "ikke-authorized-client", audience = "k9-ettersending-mottak")
+        private val unAauthorizedAccessToken = Azure.V2_0.generateJwt(clientId = "ikke-authorized-client", audience = "k9-ettersending-mottak", accessAsApplication = false)
 
         private var engine = newEngine(kafkaEnvironment)
 
@@ -73,8 +73,7 @@ class K9EttersendingMottakTest {
             val testConfig = ConfigFactory.parseMap(TestConfiguration.asMap(
                 wireMockServer = wireMockServer,
                 kafkaEnvironment = kafkaEnvironment,
-                k9EttersendingMottakAzureClientId = "k9-ettersending-mottak",
-                azureAuthorizedClients = setOf("k9-ettersending-api")
+                k9EttersendingMottakAzureClientId = "k9-ettersending-mottak"
             ))
             val mergedConfig = testConfig.withFallback(fileConfig)
             return HoconApplicationConfig(mergedConfig)

@@ -13,7 +13,6 @@
   "serviceuserKvPath": "/serviceuser/data/prod/srvk9ettersend-mtk",
   "env": {
     "K9_DOKUMENT_BASE_URL": "https://k9-dokument.nais.adeo.no",
-    "AZURE_AUTHORIZED_CLIENTS": "a4eaccac-44bd-41da-b9a4-2b3845686ad6",
     "AZURE_V1_DISCOVERY_ENDPOINT": "https://login.microsoftonline.com/62366534-1ec3-4962-8869-9b5535279d0b/.well-known/openid-configuration",
     "AZURE_V2_DISCOVERY_ENDPOINT": "https://login.microsoftonline.com/62366534-1ec3-4962-8869-9b5535279d0b/v2.0/.well-known/openid-configuration",
     "LAGRE_DOKUMENT_SCOPES": "0c5a6709-ba2a-42b7-bbfc-9b9f844e2ee2/.default",
