@@ -1,15 +1,17 @@
 {
   "app": "k9-ettersending-mottak",
   "cluster": "prod-fss",
-  "namespace": "default",
+  "namespace": "dusseldorf",
   "team": "dusseldorf",
+  "tenant" : "nav.no",
+  "k9-ettersending-api-cluster" : "prod-gcp",
   "minReplicas": "1",
   "maxReplicas": "2",
   "ingresses": [
     "https://k9-ettersending-mottak.nais.adeo.no",
     "https://k9-ettersending-mottak.prod-fss-pub.nais.io "
   ],
-  "vaultKvPath": "/kv/prod/fss/k9-ettersending-mottak/default",
+  "vaultKvPath": "/kv/prod/fss/k9-ettersending-mottak/dusseldorf",
   "azureadKvPath": "/azuread/data/prod/creds/k9-ettersending-mottak",
   "serviceuserKvPath": "/serviceuser/data/prod/srvk9ettersend-mtk",
   "env": {
