@@ -40,6 +40,12 @@ spec:
   prometheus:
     enabled: true
     path: /metrics
+  accessPolicy:
+    inbound:
+      rules:
+        - application: k9-ettersending-api
+          namespace: dusseldorf
+          cluster: {{k9-ettersending-api-cluster}}
   vault:
     enabled: true
     paths:
