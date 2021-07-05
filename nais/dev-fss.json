@@ -11,7 +11,6 @@
     "https://k9-ettersending-mottak.nais.preprod.local",
     "https://k9-ettersending-mottak.dev-fss-pub.nais.io"
   ],
-  "serviceuserKvPath": "/serviceuser/data/dev/srvk9ettersend-mtk",
   "env": {
     "K9_DOKUMENT_BASE_URL": "https://k9-dokument.nais.preprod.local",
     "AZURE_V1_DISCOVERY_ENDPOINT": "https://login.microsoftonline.com/966ac572-f5b7-4bbe-aa88-c76419c0f851/.well-known/openid-configuration",
