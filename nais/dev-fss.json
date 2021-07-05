@@ -11,13 +11,9 @@
     "https://k9-ettersending-mottak.nais.preprod.local",
     "https://k9-ettersending-mottak.dev-fss-pub.nais.io"
   ],
-  "vaultKvPath": "/kv/preprod/fss/k9-ettersending-mottak/dusseldorf",
-  "azureadKvPath": "/azuread/data/dev/creds/k9-ettersending-mottak",
-  "serviceuserKvPath": "/serviceuser/data/dev/srvk9ettersend-mtk",
   "env": {
     "K9_DOKUMENT_BASE_URL": "https://k9-dokument.nais.preprod.local",
     "AZURE_V1_DISCOVERY_ENDPOINT": "https://login.microsoftonline.com/966ac572-f5b7-4bbe-aa88-c76419c0f851/.well-known/openid-configuration",
-    "AZURE_V2_DISCOVERY_ENDPOINT": "https://login.microsoftonline.com/966ac572-f5b7-4bbe-aa88-c76419c0f851/v2.0/.well-known/openid-configuration",
     "LAGRE_DOKUMENT_SCOPES": "97f0b1bc-6aa9-4d44-a3c7-60b4318fbec4/.default",
     "KAFKA_BOOTSTRAP_SERVERS": "b27apvl00045.preprod.local:8443,b27apvl00046.preprod.local:8443,b27apvl00047.preprod.local:8443"
   },
