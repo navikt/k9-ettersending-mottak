@@ -10,7 +10,7 @@ val mainClass = "no.nav.helse.K9EttersendingMottakKt"
 
 
 plugins {
-    kotlin("jvm") version "1.5.10"
+    kotlin("jvm") version "1.5.21"
     id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
