@@ -1,16 +1,10 @@
 package no.nav.helse.mottakEttersending.v1
 
-import io.ktor.application.ApplicationCall
-import io.ktor.application.call
-import io.ktor.http.HttpHeaders
-import io.ktor.http.HttpStatusCode
-import io.ktor.request.ApplicationRequest
-import io.ktor.request.header
-import io.ktor.request.receiveStream
-import io.ktor.response.ApplicationResponse
-import io.ktor.response.respond
-import io.ktor.routing.Route
-import io.ktor.routing.post
+import io.ktor.application.*
+import io.ktor.http.*
+import io.ktor.request.*
+import io.ktor.response.*
+import io.ktor.routing.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import no.nav.helse.Metadata
@@ -49,8 +43,7 @@ private suspend fun ApplicationCall.soknadEttersending() : EttersendingV1Incomin
 
 private fun ApplicationCall.metadata() = Metadata(
     version = 1,
-    correlationId = request.getCorrelationId(),
-    requestId = response.getRequestId()
+    correlationId = request.getCorrelationId()
 )
 
 
