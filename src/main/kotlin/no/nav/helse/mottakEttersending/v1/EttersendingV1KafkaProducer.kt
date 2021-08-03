@@ -71,7 +71,6 @@ private class EttersendingV1OutgoingSerialier : Serializer<TopicEntry<JSONObject
     override fun serialize(topic: String, data: TopicEntry<JSONObject>) : ByteArray {
         val metadata = JSONObject()
             .put("correlationId", data.metadata.correlationId)
-            .put("requestId", data.metadata.requestId)
             .put("version", data.metadata.version)
 
         return JSONObject()
