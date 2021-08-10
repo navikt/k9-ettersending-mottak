@@ -33,7 +33,7 @@ internal class EttersendingV1KafkaProducer(
         TOPIC_USE.valueSerializer
     )
 
-    internal fun produce(
+    internal fun produserKafkaMelding(
         soknad: EttersendingV1Outgoing,
         metadata: Metadata
     ) {

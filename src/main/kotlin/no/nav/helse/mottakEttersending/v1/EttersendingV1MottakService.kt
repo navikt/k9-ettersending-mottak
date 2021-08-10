@@ -39,7 +39,7 @@ internal class EttersendingV1MottakService(
             .somOutgoing()
 
         logger.trace("Legger ettersending på kø")
-        ettersendingV1KafkaProducer.produce(
+        ettersendingV1KafkaProducer.produserKafkaMelding(
             metadata = metadata,
             soknad = outgoing
         )

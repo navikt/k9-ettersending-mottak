@@ -16,5 +16,5 @@ internal data class TopicUse<V>(
 }
 
 internal object Topics {
-    internal const val MOTTATT_ETTERSEND = "privat-k9-ettersending-mottatt"
+    internal const val MOTTATT_ETTERSEND = "dusseldorf.privat-k9-ettersending-mottatt"
 }
