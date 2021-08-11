@@ -1,15 +1,14 @@
 package no.nav.helse
 
-import io.ktor.config.ApplicationConfig
-import io.ktor.util.KtorExperimentalAPI
-import no.nav.helse.dusseldorf.ktor.auth.*
+import io.ktor.config.*
+import no.nav.helse.dusseldorf.ktor.auth.issuers
+import no.nav.helse.dusseldorf.ktor.auth.withoutAdditionalClaimRules
 import no.nav.helse.dusseldorf.ktor.core.getOptionalString
 import no.nav.helse.dusseldorf.ktor.core.getRequiredList
 import no.nav.helse.dusseldorf.ktor.core.getRequiredString
 import no.nav.helse.kafka.KafkaConfig
 import java.net.URI
 
-@KtorExperimentalAPI
 data class Configuration(private val config : ApplicationConfig) {
 
     private val issuers = config.issuers()
@@ -19,18 +18,26 @@ data class Configuration(private val config : ApplicationConfig) {
     }
 
     internal fun issuers() = issuers.withoutAdditionalClaimRules()
+
     internal fun getK9DokumentBaseUrl() = URI(config.getRequiredString("nav.k9_dokument_base_url", secret = false))
+
     internal fun getKafkaConfig() = config.getRequiredString("nav.kafka.bootstrap_servers", secret = false).let { bootstrapServers ->
-        val trustStore = config.getOptionalString("nav.trust_store.path", secret = false)?.let { trustStorePath ->
-            config.getOptionalString("nav.trust_store.password", secret = true)?.let { trustStorePassword ->
-                Pair(trustStorePath, trustStorePassword)
+        val trustStore = config.getOptionalString("nav.kafka.truststore_path", secret = false)?.let { trustStorePath ->
+            config.getOptionalString("nav.kafka.credstore_password", secret = true)?.let { credstorePassword ->
+                Pair(trustStorePath, credstorePassword)
+            }
+        }
+
+        val keyStore = config.getOptionalString("nav.kafka.keystore_path", secret = false)?.let { keystorePath ->
+            config.getOptionalString("nav.kafka.credstore_password", secret = true)?.let { credstorePassword ->
+                Pair(keystorePath, credstorePassword)
             }
         }
 
         KafkaConfig(
             bootstrapServers = bootstrapServers,
-            credentials = Pair(config.getRequiredString("nav.kafka.username", secret = false), config.getRequiredString("nav.kafka.password", secret = true)),
-            trustStore = trustStore
+            trustStore = trustStore,
+            keyStore = keyStore
         )
     }
 
